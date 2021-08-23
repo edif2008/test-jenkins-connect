@@ -9,8 +9,6 @@ pipeline {
     stages {
     	stage('deploy connect') {
     	    steps {
-    	    	sh 'mkdir -p /home/opuser/.op'
-    	    	sh 'mkdir -p /home/opuser/.op/data'
     	        sh 'cd connect && docker-compose build'
     	        sh 'cd connect && docker-compose up -d'
     	    }
