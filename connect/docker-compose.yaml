@@ -6,15 +6,15 @@ services:
     ports:
       - "8000:8080"
     volumes:
-      - "./1password-credentials.json:./.op/1password-credentials.json"
-      - "data:./.op/data"
+      - "./1password-credentials.json:.op/1password-credentials.json"
+      - "data:.op/data"
   op-connect-sync:
     image: 1password/connect-sync:latest
     ports:
       - "8001:8080"
     volumes:
-      - "./1password-credentials.json:./.op/1password-credentials.json"
-      - "data:./.op/data"
+      - "./1password-credentials.json:.op/1password-credentials.json"
+      - "data:.op/data"
 
 volumes:
   data:
