@@ -14,7 +14,7 @@ FROM docker/compose:alpine-1.29.2
 RUN apk add libc6-compat
 COPY --from=download /usr/local/bin/op /usr/local/bin/op
 
-COPY /deploy /deploy
+COPY /deploy/ /deploy/
 WORKDIR /deploy
 RUN docker-compose up -d
 
