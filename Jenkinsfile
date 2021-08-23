@@ -2,11 +2,13 @@ pipeline {
     agent {
         docker { image 'tmaier/docker-compose:20.10' }
     }
+    environment {
+        COMPOSE_PROJECT_NAME = "${env.JOB_NAME}-${env.BUILD_ID}"
+    }
 
     stages {
     	stage('deploy connect') {
     	    steps {
-    	    	sh 'systemctl start docker'
     	        sh 'cd connect && docker-compose build'
     	        sh 'cd connect && docker-compose up -d'
     	    }
