@@ -16,6 +16,5 @@ COPY --from=download /usr/local/bin/op /usr/local/bin/op
 
 COPY connect /connect
 WORKDIR /connect
-RUN ls
 RUN docker-compose up -d
 
