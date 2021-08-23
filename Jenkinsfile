@@ -9,6 +9,7 @@ pipeline {
     stages {
     	stage('deploy connect') {
     	    steps {
+    	    	sh 'docker-compose --version'
     	        sh 'cd connect && docker-compose build'
     	        sh 'cd connect && docker-compose up -d'
     	    }
