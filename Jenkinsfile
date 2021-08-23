@@ -6,8 +6,7 @@ pipeline {
     stages {
     	stage('deploy connect') {
     	    steps {
-    	    	sh 'ls && cd connect && ls'
-    	    	sh 'cd connect && ls'
+    	    	sh 'systemctl start docker'
     	        sh 'cd connect && docker-compose build'
     	        sh 'cd connect && docker-compose up -d'
     	    }
