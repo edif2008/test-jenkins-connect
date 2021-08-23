@@ -20,10 +20,10 @@ pipeline {
                 sh './op read op://acceptance-tests/test-secret/username'
             }
         }
-        post {
-      	    always {
-                sh "docker-compose down || true"
-            }
-        } 
     }
+    post {
+      	always {
+            sh "docker-compose down || true"
+        }
+    } 
 }
