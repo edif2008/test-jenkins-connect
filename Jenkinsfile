@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'docker/compose:alpine-1.29.2' }
+        docker { image 'tmaier/docker-compose:20.10' }
     }
 
     stages {
@@ -23,7 +23,7 @@ pipeline {
     }
     post {
       	always {
-            sh "docker-compose down || true"
+            sh "cd connect && docker-compose down || true"
         }
     } 
 }
