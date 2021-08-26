@@ -11,7 +11,7 @@ pipeline {
             }
             steps {            
                 // Read a secret
-                sh './op read op://acceptance-tests/test-secret/username'
+                sh 'op read op://acceptance-tests/test-secret/username'
             }
         }
     }
