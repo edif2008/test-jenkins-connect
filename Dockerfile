@@ -3,18 +3,17 @@ FROM alpine as download
 RUN apk add curl unzip
 
 ENV ARCH amd64
-ENV OP_CLI_VERSION v2-alpha1
+ENV OP_CLI_VERSION v2-alpha2
 
 RUN curl -sSfo op.zip https://bucket.agilebits.com/cli-private-beta/v2/op_linux_${ARCH}_${OP_CLI_VERSION}.zip \
   && unzip -od /usr/local/bin/ op.zip \
   && rm op.zip
 
-FROM docker/compose:alpine-1.29.2
+FROM alpine
 
-RUN apk add libc6-compat
+RUN addgroup -S opgroup && adduser -S opuser -G opgroup
+
+RUN apk add libc6-compat sed openssl
 COPY --from=download /usr/local/bin/op /usr/local/bin/op
 
-COPY connect /connect
-WORKDIR /connect
-RUN docker-compose up -d
-
+USER opuser

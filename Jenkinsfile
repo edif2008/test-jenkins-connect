@@ -1,21 +1,12 @@
 pipeline {
     agent {
-        docker { image 'tmaier/docker-compose:20.10' }
-    }
-    environment {
-        COMPOSE_PROJECT_NAME = "${env.JOB_NAME}-${env.BUILD_ID}"
+        dockerfile true
     }
 
     stages {
-    	stage('deploy connect') {
-    	    steps {
-    	        sh 'cd connect && docker-compose build'
-    	        sh 'cd connect && docker-compose up -d'
-    	    }
-    	}
         stage('OP CLI test') {
             environment {
-                OP_CONNECT_HOST='http://localhost:8000'
+                OP_CONNECT_HOST='https://edf8-2001-1c00-b0b-dd00-3c41-1978-f314-b4f4.ngrok.io'
                 OP_CONNECT_TOKEN=credentials('op_connect_token')
             }
             steps {            
@@ -24,9 +15,4 @@ pipeline {
             }
         }
     }
-    post {
-      	always {
-            sh "cd connect && docker-compose down || true"
-        }
-    } 
 }
